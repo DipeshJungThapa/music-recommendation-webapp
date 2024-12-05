@@ -1,0 +1,7 @@
+/ml-model/bin
+/ml-model/include
+/ml-model/lib
+/ml-model/lib64
+/ml-model/pyvenv.cfg
+./AudioAtlas.code-worksapce
+/node_modules
