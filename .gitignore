@@ -3,5 +3,8 @@
 /ml-model/lib
 /ml-model/lib64
 /ml-model/pyvenv.cfg
-./AudioAtlas.code-worksapce
+/ml-model/fma_metadata
+/ml-model/MillionSongSubset
+AudioAtlas.code-workspace
+prompt.txt
 /node_modules
