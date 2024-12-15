@@ -39,7 +39,7 @@ features = features[selected_echonest_columns]
 merged_df = pd.merge(tracks, features, left_index=True, right_index=True)
 
 # Save the merged data for further processing
-merged_df.to_csv("merged_data.csv", index=False)
+merged_df.to_csv("./fma_metadata/output/merged_data.csv", index=False)
 
 print("Data has been successfully merged and saved as 'merged_data.csv'.")
 
