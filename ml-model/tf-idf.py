@@ -1,28 +1,31 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Load the filtered dataset
-filtered_df = pd.read_csv("./fma_metadata/output/merged_cleaned_encoded.csv") 
-# Convert list of genres in `track genres_all` to a space-separated string
+# Load the cleaned dataset
+filtered_df = pd.read_csv("./fma_metadata/output/merged_cleaned.csv")
+
+# Ensure 'track genres_all' column is present and convert to a space-separated string for TF-IDF processing
 filtered_df['track genres_all_str'] = filtered_df['track genres_all'].apply(lambda x: ' '.join(eval(x)))
 
 # Initialize TF-IDF Vectorizer
 tfidf = TfidfVectorizer()
 
-# Fit and transform the `track genres_all_str` column
+# Fit and transform the 'track genres_all_str' column
 tfidf_matrix = tfidf.fit_transform(filtered_df['track genres_all_str'])
 
-# Convert the TF-IDF matrix to a DataFrame
-tfidf_df = pd.DataFrame(tfidf_matrix.toarray(), columns=tfidf.get_feature_names_out())
+# Create a DataFrame from the TF-IDF matrix
+tfidf_df = pd.DataFrame(
+    tfidf_matrix.toarray(), 
+    columns=[f"tfidf_{feature}" for feature in tfidf.get_feature_names_out()]
+)
 
-# Conca
-# tenate the TF-IDF DataFrame with the original dataset
+# Add the TF-IDF DataFrame to the original DataFrame
 filtered_df = pd.concat([filtered_df, tfidf_df], axis=1)
 
-# Drop the original `track genres_all`, `track genres`, and `track genres_all_str` columns
-filtered_df.drop(columns=['track genres_all', 'track genres', 'track genres_all_str'], inplace=True)
+# Drop the intermediate 'track genres_all_str' column and original 'track genres_all' column
+filtered_df = filtered_df.drop(columns=['track genres_all_str', 'track genres_all'], axis=1)
 
-# Save the resulting dataset
-filtered_df.to_csv("./fma_metadata/output/final_with_tfidf_cleaned.csv", index=False)
+# Save the updated DataFrame with the new TF-IDF columns
+filtered_df.to_csv("./fma_metadata/output/merged_with_tfidf.csv", index=False)
 
-print(f"TF-IDF features added, redundant columns dropped, and saved as 'final_with_tfidf_cleaned.csv'.")
+print("TF-IDF encoding completed and saved to 'merged_with_tfidf.csv'.")

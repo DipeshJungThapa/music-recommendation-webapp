@@ -9,3 +9,4 @@ AudioAtlas.code-workspace
 prompt.txt
 /node_modules
 /ml-model/share
+/ml-models/diagrams
