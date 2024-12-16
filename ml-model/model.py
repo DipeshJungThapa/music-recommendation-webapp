@@ -2,15 +2,15 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load the dataset with normalized and encoded columns
-df = pd.read_csv("./fma_metadata/output/merged_with_tfidf.csv")
+df = pd.read_csv("./fma_metadata/output/merged_cleaned_encoded_tfidf.csv")
 
 # Select relevant columns for recommendation
 # Use columns starting with 'tfidf_' and normalized audio features
 tfidf_columns = [col for col in df.columns if col.startswith("tfidf_")]
 audio_feature_columns = [
-    "normalized_acousticness", "normalized_danceability", "normalized_energy",
-    "normalized_instrumentalness", "normalized_liveness", "normalized_speechiness",
-    "normalized_tempo"
+    "audio_features acousticness", "audio_features danceability", "audio_features energy",
+    "audio_features instrumentalness", "audio_features liveness", "audio_features  speechiness",
+    "audio_features tempo"
 ]
 encoded_columns = ["encoded_artist_name", "encoded_track_genre_top"]
 

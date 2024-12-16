@@ -2,7 +2,6 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 def normalize(input_file_path,col_to_normalize):
-    input_file_path = "./fma_metadata/output/final_with_tfidf_cleaned.csv"
     df = pd.read_csv(input_file_path)
     scaler = MinMaxScaler()
     df[col_to_normalize] = scaler.fit_transform(df[col_to_normalize])
@@ -23,9 +22,10 @@ def main():
 
     try:
         df = normalize("./fma_metadata/output/merged_cleaned_encoded_tfidf.csv",col_to_normalize).to_csv("./fma_metadata/output/normalized.csv",index=False)
+        print("Data normalization completed and saved to 'normalized.csv'.")
     except Exception as e:
         print(e)
         print("Error endocuntered while normalizing the data")
 
 if __name__ == "__main__":
-    main
+    main()
