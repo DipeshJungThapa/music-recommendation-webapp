@@ -9,13 +9,12 @@ df = pd.read_csv("./fma_metadata/output/merged_cleaned_encoded_tfidf.csv")
 tfidf_columns = [col for col in df.columns if col.startswith("tfidf_")]
 audio_feature_columns = [
     "audio_features acousticness", "audio_features danceability", "audio_features energy",
-    "audio_features instrumentalness", "audio_features liveness", "audio_features  speechiness",
+    "audio_features instrumentalness", "audio_features liveness", "audio_features speechiness",
     "audio_features tempo"
 ]
-encoded_columns = ["encoded_artist_name", "encoded_track_genre_top"]
 
 # Combine all feature columns
-feature_columns = tfidf_columns + audio_feature_columns + encoded_columns
+feature_columns = tfidf_columns + audio_feature_columns 
 
 # Compute feature matrix
 feature_matrix = df[feature_columns]

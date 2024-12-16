@@ -16,12 +16,12 @@ def tf_idf(input_file_path):
     #merge two df that we have
     filtered_df = pd.concat([filtered_df, tfidf_df], axis=1)
     #drop original columns
-    filtered_df = filtered_df.drop(columns=['track genres_all_str', 'track genres_all'], axis=1)
+    filtered_df = filtered_df.drop(columns=['track genres_all_str', 'track genres_all','track genres'], axis=1)
     return filtered_df
 
 def main():
     try:
-        df = tf_idf("./fma_metadata/output/merged_cleaned.csv").to_csv("./fma_metadata/output/merged_cleaned_encoded_tfidf.csv",index=False)
+        df = tf_idf("./fma_metadata/output/merged_cleaned_encoded.csv").to_csv("./fma_metadata/output/merged_cleaned_encoded_tfidf.csv",index=False)
         print("TF-IDF encoding completed and saved to 'merged_cleaned_encoded_tfidf.csv'.")
     except Exception as e:
         print(e)
