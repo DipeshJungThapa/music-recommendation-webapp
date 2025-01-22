@@ -6,7 +6,7 @@
 /ml-model/fma_metadata
 /ml-model/MillionSongSubset
 AudioAtlas.code-workspace
-prompt.txt
 /node_modules
 /ml-model/share
-/ml-models/diagrams
+/ml-model/diagrams
+/ml-model/test.txt
