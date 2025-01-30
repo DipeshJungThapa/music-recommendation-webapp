@@ -5,7 +5,7 @@ import librosa
 import numpy as np
 import pandas as pd
 
-# Function to extract metadata
+
 def extract_metadata(file_path):
     try:
         audio = MP3(file_path, ID3=ID3)
@@ -33,7 +33,7 @@ def extract_metadata(file_path):
         print(f"Error extracting metadata for {file_path}: {e}")
     return metadata
 
-# Function to extract audio features
+
 def extract_audio_features(file_path):
     try:
         y, sr = librosa.load(file_path, sr=22050, mono=True)
@@ -57,7 +57,7 @@ def extract_audio_features(file_path):
         print(f"Error extracting audio features for {file_path}: {e}")
     return features
 
-# Main function to process a directory of audio files
+
 def process_audio_directory(directory_path, output_file="audio_features.csv"):
     audio_data = []
     for file_name in os.listdir(directory_path):
@@ -73,11 +73,11 @@ def process_audio_directory(directory_path, output_file="audio_features.csv"):
             except Exception as e:
                 print(f"Error processing {file_name}: {e}")
 
-    # Convert the data to a DataFrame and save it to CSV
+    
     df = pd.DataFrame(audio_data)
     df.to_csv(output_file, index=False)
     print(f"Audio data saved to {output_file}")
 
-# Specify the directory path
-audio_directory = './test-files/'  # Replace with your directory path
+
+audio_directory = './test-files/'  
 process_audio_directory(audio_directory, output_file="audio_features.csv")
