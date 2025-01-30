@@ -1,4 +1,6 @@
 import pandas as pd
+import os
+from dotenv import load_dotenv
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 def tf_idf(input_file_path):
@@ -16,12 +18,21 @@ def tf_idf(input_file_path):
     #merge two df that we have
     filtered_df = pd.concat([filtered_df, tfidf_df], axis=1)
     #drop original columns
-    filtered_df = filtered_df.drop(columns=['track genres_all_str', 'track genres_all','track genres'], axis=1)
+    filtered_df = filtered_df.drop(columns=['track genres_all_str', 'track genres_all'], axis=1)
     return filtered_df
 
 def main():
+    load_dotenv()
+    merged_cleaned_encoded_path = os.getenv("MERGED_CLEANED_ENCODED_PATH")
+    merged_cleaned_encoded_tfidf_path = os.getenv("MERGED_CLEANED_ENCODED_TFIDF_PATH")
+    
+    if not all([merged_cleaned_encoded_path, merged_cleaned_encoded_tfidf_path]):
+        print("One or more environment variables are missing")
+        return
+    
+    
     try:
-        df = tf_idf("./fma_metadata/output/merged_cleaned_encoded.csv").to_csv("./fma_metadata/output/merged_cleaned_encoded_tfidf.csv",index=False)
+        df = tf_idf(merged_cleaned_encoded_path).to_csv(merged_cleaned_encoded_tfidf_path,index=False)
         print("TF-IDF encoding completed and saved to 'merged_cleaned_encoded_tfidf.csv'.")
     except Exception as e:
         print(e)

@@ -51,9 +51,11 @@ def main():
     echonest_path = os.getenv("ECHONEST_PATH")
     features_path = os.getenv("FEATURES_PATH")
     output_path =   os.getenv("MERGED_PATH")
+
+   
     selected_tracks_columns = [
         "track_id","track title", "album id", "artist id","artist name", 
-        "track genre_top", "track genres_all", "track language_code"
+        "track genre_top","track genres", "track genres_all"
     ]
     selected_echonest_columns = [
         "audio_features acousticness", "audio_features danceability", "audio_features energy", "audio_features instrumentalness",
@@ -64,7 +66,8 @@ def main():
         merge_df(tracks_path,echonest_path,features_path,selected_tracks_columns,selected_echonest_columns).to_csv(output_path, index=False)
         print("Merging completed successfully")
     except Exception as e:
-        print(f"errors during merging: {e}")
+        print("Error: ", e)
+        
     
 if __name__ == "__main__":
     main()

@@ -4,7 +4,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, f1_score
 from imblearn.over_sampling import SMOTE
 from sklearn.decomposition import PCA
-
+import joblib
 
 df = pd.read_csv('./fma_metadata/output/normalized.csv')
 target_column = 'track genre_top'
@@ -70,3 +70,6 @@ print(classification_report(y_test, y_pred))
 
 print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
+
+joblib.dump(knn, './model/knn.pkl')
+joblib.dump(pca, './model/pca.pkl')

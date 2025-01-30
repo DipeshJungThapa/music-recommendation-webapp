@@ -1,4 +1,5 @@
 import pandas as pd
+from dotenv import load_dotenv
 from sklearn.preprocessing import LabelEncoder
 import os
 
@@ -15,14 +16,18 @@ def encode_column(df, column_name):
     print(df[column_name].unique())
 
 def main():
-    df = pd.read_csv("./fma_metadata/output/merged_cleaned.csv")
+    load_dotenv()
+    merged_cleaned_path = os.getenv("MERGED_CLEANED_PATH")
+    merged_cleaned_encoded_path = os.getenv("MERGED_CLEANED_ENCODED_PATH")
+
+    df = pd.read_csv(merged_cleaned_path)
     
     encode_column(df, 'track genre_top')
     encode_column(df, 'artist name')
     
-    output_file = './fma_metadata/output/merged_cleaned_encoded.csv'
+    output_file = merged_cleaned_encoded_path
     df.to_csv(output_file, index=False)
-    print(f"Encoded data with both Label Encoding and One-Hot Encoding has been saved to '{output_file}'.")
+    print(f"Encoded data with both Label Encoding has been saved to '{output_file}'.")
 
 
 if __name__ == "__main__":
