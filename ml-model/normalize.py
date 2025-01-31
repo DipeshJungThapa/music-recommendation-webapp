@@ -27,7 +27,7 @@ def main():
         'spectral_contrast mean 01', 'spectral_contrast mean 02',
         'spectral_contrast mean 03', 'spectral_contrast mean 04',
         'spectral_contrast mean 05', 'spectral_contrast mean 06',
-        'spectral_centroid mean 01', 'spectral_rolloff mean 01'
+        'spectral_centroid mean 01', 'spectral_rolloff mean 01','audio_features tempo'
         ]
 
     try:

@@ -19,6 +19,8 @@ def select_features(df, target_column):
            col.startswith('spectral_centroid mean') or col.startswith('spectral_rolloff mean') or
            col.startswith('tfidf_')  
     ]
+    selected_features.append('audio_features tempo')
+
     X = df[selected_features]
     y = df[target_column]
     return X, y
@@ -43,8 +45,8 @@ def apply_pca(X_train, X_test, n_components=50):
     X_test_pca = pca.transform(X_test)
     return X_train_pca, X_test_pca, pca
 
-def train_knn(X_train, y_train, n_neighbors=5, metric='cosine', algorithm='brute', weights='distance'):
-    knn = KNeighborsClassifier(n_neighbors=n_neighbors, metric=metric, algorithm=algorithm, weights=weights)
+def train_knn(X_train, y_train):
+    knn = KNeighborsClassifier(n_neighbors=5, metric='cosine', algorithm='brute', weights='distance')
     knn.fit(X_train, y_train)
     return knn
 
