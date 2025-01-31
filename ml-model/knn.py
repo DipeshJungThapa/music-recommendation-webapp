@@ -20,6 +20,7 @@ def select_features(df, target_column):
            col.startswith('tfidf_')  
     ]
     selected_features.append('audio_features tempo')
+    print(f"Selected features: {selected_features}")
 
     X = df[selected_features]
     y = df[target_column]

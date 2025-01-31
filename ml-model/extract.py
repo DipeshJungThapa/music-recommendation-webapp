@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 from dotenv import load_dotenv
 
-
 def extract_metadata(file_path):
     try:
         audio = MP3(file_path, ID3=ID3)
@@ -30,35 +29,28 @@ def extract_metadata(file_path):
         print(f"Error extracting metadata for {file_path}: {e}")
     return metadata
 
-
 def extract_audio_features(file_path):
     try:
         y, sr = librosa.load(file_path, sr=22050, mono=True)
         features = {
             "audio_features tempo": librosa.beat.tempo(y=y, sr=sr)[0],
-        }
-        
-        
+        }        
         chroma_cens = librosa.feature.chroma_cens(y=y, sr=sr)
         for i in range(chroma_cens.shape[0]):
             features[f'chroma_cens mean {i+1:02d}'] = np.mean(chroma_cens[i])
 
-        
         mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
         for i in range(mfcc.shape[0]):
             features[f'mfcc mean {i+1:02d}'] = np.mean(mfcc[i])
 
-        
         tonnetz = librosa.feature.tonnetz(y=y, sr=sr)
         for i in range(tonnetz.shape[0]):
             features[f'tonnetz mean {i+1:02d}'] = np.mean(tonnetz[i])
 
-        
         spectral_contrast = librosa.feature.spectral_contrast(y=y, sr=sr)
         for i in range(spectral_contrast.shape[0]):
             features[f'spectral_contrast mean {i+1:02d}'] = np.mean(spectral_contrast[i])
 
-        
         spectral_centroid = librosa.feature.spectral_centroid(y=y, sr=sr)
         spectral_rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr)
         features['spectral_centroid mean 01'] = np.mean(spectral_centroid)
