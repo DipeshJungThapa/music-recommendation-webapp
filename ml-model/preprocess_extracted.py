@@ -15,6 +15,13 @@ def preprocess(extracted_path):
     df = pd.read_csv(extracted_path)
     df['track_id'] = range(1, len(df) + 1)
 
+    initial_row_count = len(df)
+    df = df[df['genre'] != 'Unknown']
+    removed_rows = initial_row_count - len(df)
+    
+    print(f"Removed {removed_rows} rows with 'Unknown' genre.")
+
+    # Check for missing values
     missing_values = df.isnull().sum()
     if missing_values.any():
         print('Missing values in the following columns:')
@@ -25,7 +32,6 @@ def preprocess(extracted_path):
     return df
 
 def perform_tfidf_on_genre(df, genre_column, tfidf_model_path):
-    
     tfidf_vectorizer = joblib.load(tfidf_model_path)
     tfidf_matrix = tfidf_vectorizer.transform(df[genre_column])
 
@@ -49,7 +55,6 @@ def main():
     output_file = os.getenv("NORMALIZED_EXTRACTED_PATH")
     tfidf_model_path = './model/tfidf_model.pkl'  
 
-    
     col_to_normalize = [
         'chroma_cens mean 01', 'chroma_cens mean 02', 'chroma_cens mean 03',
         'chroma_cens mean 04', 'chroma_cens mean 05', 'chroma_cens mean 06',
@@ -71,10 +76,12 @@ def main():
         df_normalized = normalize(df, col_to_normalize)
         genre_column = 'genre'  
         df_with_tfidf = perform_tfidf_on_genre(df_normalized, genre_column, tfidf_model_path)
+
+        # Reorder columns to keep track_id first
         cols = ['track_id'] + [col for col in df_with_tfidf.columns if col != 'track_id']
         df_with_tfidf = df_with_tfidf[cols]
+
         df_with_tfidf.to_csv(output_file, index=False)
-        
         print("Data normalization and TF-IDF transformation completed and saved.")
     
     except Exception as e:
