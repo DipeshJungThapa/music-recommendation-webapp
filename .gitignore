@@ -13,3 +13,5 @@ AudioAtlas.code-workspace
 /ml-model/output/
 /ml-model/model/
 /ml-model/audio_files/
+/ml-model/testing/
+/ml-model/__pycache__/

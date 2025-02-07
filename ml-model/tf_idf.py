@@ -18,7 +18,7 @@ def tf_idf(input_file_path):
     )
     filtered_df = pd.concat([filtered_df, tfidf_df], axis=1)
     filtered_df = filtered_df.drop(columns=['track genres_all_str', 'track genres_all'], axis=1)
-    joblib.dump(tfidf, './model/tfidf_model.pkl')
+    joblib.dump(tfidf, './model/tfidf.pkl')
     return filtered_df
 
 def main():

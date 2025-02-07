@@ -85,14 +85,3 @@ def process_audio_directory(directory_path, output_file="audio_features.csv"):
     else:
         print("No audio files were processed successfully.")
 
-
-def main():
-    load_dotenv()
-
-    extracted_path = os.getenv("EXTRACTED_PATH")
-    audio_directory = os.getenv("AUDIO_DIRECTORY")
-
-    process_audio_directory(audio_directory, output_file=extracted_path)
-
-if __name__ == "__main__":
-    main()
