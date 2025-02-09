@@ -1,22 +1,29 @@
 import React, { useRef, useState, useEffect } from 'react';
-import './ImageUpload.css';
+import './AudioUpload.css';
 import Button from './Button';
 
-const ImageUpload = (props) => {
+const AudioUpload = (props) => {
   const filePickerRef = useRef();
   const [file, setFile] = useState();
-  const [previewUrl, setPreviewUrl] = useState();
+  const [fileInfo, setFileInfo] = useState({ name: '', size: '' });
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     if (!file) {
       return;
     }
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setPreviewUrl(fileReader.result);
-    };
-    fileReader.readAsDataURL(file);
+    if (file.type !== 'audio/mpeg') {
+      setIsValid(false);
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setIsValid(false);
+      return;
+    }
+    setFileInfo({
+      name: file.name,
+      size: (file.size / 1024).toFixed(2) + ' KB',
+    });
   }, [file]);
 
   const pickedHandler = (event) => {
@@ -34,7 +41,7 @@ const ImageUpload = (props) => {
     props.onInput(props.id, pickedFile, fileIsValid);
   };
 
-  const ImageHandler = () => {
+  const AudioHandler = () => {
     filePickerRef.current.click();
   };
 
@@ -45,19 +52,30 @@ const ImageUpload = (props) => {
         style={{ display: 'none' }}
         ref={filePickerRef}
         type="file"
-        accept=".jpeg,.png,.jpg"
+        accept=".mp3,.wav,.ogg,.flac"
         onChange={pickedHandler}
       />
-      <div className={`image-upload ${props.center && 'center'}`}>
-        <div className="image-upload__preview">
-          {previewUrl && <img src={previewUrl} alt="Preview" />}
-          {!previewUrl && <p>Please pick an image.</p>}
+      <div className={`audio-upload ${props.center && 'center'}`}>
+        <div className="audio-upload__preview">
+          {file && (
+            <div>
+              <p>
+                <strong>File Name:</strong> {fileInfo.name}
+              </p>
+              <p>
+                <strong>File Size:</strong> {fileInfo.size}
+              </p>
+            </div>
+          )}
+          {!file && <p>Please pick an audio file.</p>}
         </div>
-        <Button type="button" onClick={ImageHandler}>Pick Image</Button>
+        <Button type="button" onClick={AudioHandler}>
+          Pick Audio
+        </Button>
       </div>
       {!isValid && <p>{props.errorText}</p>}
     </div>
   );
 };
 
-export default ImageUpload;
+export default AudioUpload;
