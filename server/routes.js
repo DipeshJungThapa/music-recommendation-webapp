@@ -1,16 +1,40 @@
 const express = require('express');
-const HttpError = require('./http-error');
 const fileUpload = require('./file-upload');
+const path = require('path');
+const fs = require('fs');
+const axios = require('axios');
+const FormData = require('form-data');
 
 const router = express.Router();
 
-router.post('/upload', fileUpload.single('audioFile'), (req, res, next) => {
+router.post('/upload', fileUpload.single('audioFile'), async (req, res) => {
   const audioFile = req.file;
   if (!audioFile) {
-    const error = new HttpError('No file found', 404);
-    return next(error);
+    return res.status(400).json({ error: 'No file uploaded' });
   }
 
-  res.status(201).json({ audioFile: audioFile });
+  const filePath = path.join(__dirname, audioFile.path);
+
+  const form = new FormData();
+  form.append('file', fs.createReadStream(filePath), {
+    filename: audioFile.originalname,
+    contentType: audioFile.mimetype,
+  });
+
+  try {
+    const response = await axios.post('http://localhost:7000/recommend', form, {
+      headers: {
+        ...form.getHeaders(),
+      },
+    });
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error(
+      'Error sending file to recommendation service:',
+      error.response?.data || error.message
+    );
+    res.status(500).json({ error: 'Failed to process the file' });
+  }
 });
+
 module.exports = router;

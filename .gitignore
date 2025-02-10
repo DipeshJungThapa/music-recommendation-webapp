@@ -15,8 +15,10 @@ AudioAtlas.code-workspace
 /ml-model/audio_files/
 /ml-model/testing/
 /ml-model/__pycache__/
+/ml-model/.env
 /client/node_modules
 /server/node_modules
 /server/uploads
+/server/.env
 .eslintrc
 .prettierrc
