@@ -12,7 +12,12 @@ const AudioUpload = (props) => {
     if (!file) {
       return;
     }
-    if (file.type !== 'audio/mpeg') {
+    if (
+      file.type !== 'audio/mpeg' &&
+      file.type !== 'audio/wav' &&
+      file.type !== 'audio/ogg' &&
+      file.type !== 'audio/flac'
+    ) {
       setIsValid(false);
       return;
     }
@@ -73,7 +78,10 @@ const AudioUpload = (props) => {
           Pick Audio
         </Button>
       </div>
-      {!isValid && <p>{props.errorText}</p>}
+      {!isValid && file && file.size > 10 * 1024 * 1024 && (
+        <p>Audio file must be under 10MB.</p>
+      )}
+      {!isValid && !file && <p>{props.errorText}</p>}
     </div>
   );
 };
