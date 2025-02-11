@@ -27,12 +27,25 @@ router.post('/upload', fileUpload.single('audioFile'), async (req, res) => {
         ...form.getHeaders(),
       },
     });
+    console.log('Response from recommendation service:', response.data);
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error('Error deleting file:', err);
+      }
+    });
+
     res.status(200).json(response.data);
   } catch (error) {
     console.error(
       'Error sending file to recommendation service:',
       error.response?.data || error.message
     );
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error('Error deleting file after failure:', err);
+      }
+    });
+
     res.status(500).json({ error: 'Failed to process the file' });
   }
 });

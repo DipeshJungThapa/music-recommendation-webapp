@@ -26,23 +26,21 @@ app.use(
   })
 );
 app.use('/', routes);
+
 app.use((req, res, next) => {
   const error = new HttpError("couldn't find the route", 404);
   next(error);
 });
+
 app.use((error, req, res, next) => {
-  if (req.file) {
-    fs.unlink(req.file.path, () => {
-      console.log(error);
-    });
-  }
   if (res.headerSent) {
     return next(error);
   }
   res
     .status(error.code || 500)
-    .json({ message: error.message || 'an unknown error occured' });
+    .json({ message: error.message || 'An unknown error occurred' });
 });
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

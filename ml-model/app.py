@@ -24,12 +24,6 @@ app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
-    print("🔹 Request Headers:", request.headers)
-    print("🔹 Request Content-Type:", request.content_type)
-    print("🔹 Request files:", request.files)
-    print("🔹 Request form keys:", request.form.keys())
-    print("🔹 Raw request data length:", len(request.data))
-
     if 'file' not in request.files:
         return jsonify({"error": "No file uploaded"}), 400
 
