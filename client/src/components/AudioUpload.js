@@ -12,12 +12,7 @@ const AudioUpload = (props) => {
     if (!file) {
       return;
     }
-    if (
-      file.type !== 'audio/mpeg' &&
-      file.type !== 'audio/wav' &&
-      file.type !== 'audio/ogg' &&
-      file.type !== 'audio/flac'
-    ) {
+    if (file.type !== 'audio/mpeg') {
       setIsValid(false);
       return;
     }
@@ -57,7 +52,7 @@ const AudioUpload = (props) => {
         style={{ display: 'none' }}
         ref={filePickerRef}
         type="file"
-        accept=".mp3,.wav,.ogg,.flac"
+        accept=".mp3"
         onChange={pickedHandler}
       />
       <div className={`audio-upload ${props.center && 'center'}`}>
