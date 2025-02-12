@@ -21,17 +21,21 @@ Navigate to the `MLmodel` directory and ensure:
 
 - A virtual environment is activated.
 - Python version is **3.11 or below**.
+- All required libraries are installed using:
+  ```sh
+  pip install -r requirements.txt
+  ```
 
 #### Preprocessing the Dataset
 
 Run the following Python scripts in order to preprocess the dataset:
 
 ```sh
-python merge_csv.py  # Merge datasets
-python clean.py  # Clean the data
-python encoding.py  # Encode categorical values
-python tfidf.py  # Apply TF-IDF vectorization
-python normalize.py  # Normalize features
+python merge_csv.py
+python clean.py
+python encoding.py
+python tfidf.py
+python normalize.py
 ```
 
 Once preprocessing is complete, the dataset is ready for training.
@@ -56,7 +60,7 @@ The Flask server runs on **port 7000** and handles file uploads and recommendati
 
 ### 2. Setting Up the Node.js Server
 
-Navigate to the `server` directory and install dependencies(in another tab):
+In another Tab navigate to the `server` directory and install dependencies:
 
 ```sh
 cd server
@@ -73,7 +77,7 @@ The Node.js server runs on **port 5000**.
 
 ### 3. Setting Up the Frontend
 
-Navigate to the `client` directory, install dependencies, and start the client(in another tab):
+In another Tab navigate to the `client` directory, install dependencies, and start the client:
 
 ```sh
 cd client
@@ -81,7 +85,7 @@ npm i
 npm start
 ```
 
-The React Client runs on **port 3000** and will open in the browser automatically.
+The frontend runs on **port 3000** and will open in the browser automatically.
 
 ## Environment Variables
 
@@ -89,10 +93,11 @@ The project requires `.env` files inside the **ML model** and **server** directo
 
 ## Running the Application
 
-1. Start the **Flask server** (`python find-app.py` on port **7000**).
-2. Start the **Node.js server** (`npm start` inside `server/` on port **5000**).
-3. Start the **React frontend** (`npm start` inside `client/` on port **3000**).
-4. Open the web application in your browser, upload an audio file, and receive music recommendations.
+1. Install dependencies in the ML model (`pip install -r requirements.txt`).
+2. Start the **Flask server** (`python find-app.py` on port **7000**).
+3. Start the **Node.js server** (`npm start` inside `server/` on port **5000**).
+4. Start the **React frontend** (`npm start` inside `client/` on port **3000**).
+5. Open the web application in your browser, upload an audio file, and receive music recommendations.
 
 ## Workflow
 
