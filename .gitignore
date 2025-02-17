@@ -22,3 +22,4 @@ AudioAtlas.code-workspace
 /server/.env
 .eslintrc
 .prettierrc
+/test_files/
