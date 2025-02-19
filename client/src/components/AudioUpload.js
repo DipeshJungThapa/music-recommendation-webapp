@@ -69,6 +69,7 @@ const AudioUpload = (props) => {
           )}
           {!file && <p>Please pick an audio file.</p>}
         </div>
+        <br></br>
         <Button type="button" onClick={AudioHandler}>
           Pick Audio
         </Button>
