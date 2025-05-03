@@ -1,10 +1,12 @@
-import React from 'react';
-
 import Modal from './Modal';
-import Button from './Button';
 import './ErrorModal.css';
+import Button from './Button.tsx';
 
-const ErrorModal = props => {
+type ErrorModalProps = {
+  onClear: () => void;
+  error: string;
+};
+const ErrorModal = (props: ErrorModalProps) => {
   return (
     <Modal
       onCancel={props.onClear}
@@ -16,5 +18,4 @@ const ErrorModal = props => {
     </Modal>
   );
 };
-
 export default ErrorModal;

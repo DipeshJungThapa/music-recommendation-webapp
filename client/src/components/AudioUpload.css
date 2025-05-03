@@ -1,59 +1,60 @@
 .form-control {
-  margin-bottom: 1rem;
-  font-family: Arial, sans-serif;
-}
-
-.audio-upload {
-  text-align: center;
-}
-
-.audio-upload.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.audio-upload__preview {
-  margin: 1rem 0;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  text-align: left;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.audio-upload__preview p {
-  margin: 0.5rem 0;
-}
-
-button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-button:focus {
-  outline: none;
-}
-
-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-.error-text {
-  color: red;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-}
+    margin-bottom: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .audio-upload {
+    text-align: center;
+  }
+  
+  .audio-upload.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .audio-upload__preview {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .audio-upload__preview p {
+    margin: 0.5rem 0;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .error-text {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  

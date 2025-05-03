@@ -1,34 +1,49 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, ChangeEvent } from 'react';
 import './AudioUpload.css';
-import Button from './Button';
+import Button from './UI/Button';
 
-const AudioUpload = (props) => {
-  const filePickerRef = useRef();
-  const [file, setFile] = useState();
-  const [fileInfo, setFileInfo] = useState({ name: '', size: '' });
-  const [isValid, setIsValid] = useState(false);
+type AudioUploadProps = {
+  id: string;
+  onInput: (id: string, file: File | null, isValid: boolean) => void;
+  center?: boolean;
+  errorText: string;
+};
+
+const AudioUpload: React.FC<AudioUploadProps> = (props) => {
+  const filePickerRef = useRef<HTMLInputElement | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [fileInfo, setFileInfo] = useState<{ name: string; size: string }>({
+    name: '',
+    size: '',
+  });
+  const [isValid, setIsValid] = useState<boolean>(false);
 
   useEffect(() => {
     if (!file) {
       return;
     }
+
     if (file.type !== 'audio/mpeg') {
       setIsValid(false);
       return;
     }
+
     if (file.size > 10 * 1024 * 1024) {
+      // 10MB limit
       setIsValid(false);
       return;
     }
+
     setFileInfo({
       name: file.name,
       size: (file.size / 1024).toFixed(2) + ' KB',
     });
   }, [file]);
 
-  const pickedHandler = (event) => {
-    let pickedFile;
+  const pickedHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    let pickedFile: File | null = null;
     let fileIsValid = isValid;
+
     if (event.target.files && event.target.files.length === 1) {
       pickedFile = event.target.files[0];
       setFile(pickedFile);
@@ -38,11 +53,12 @@ const AudioUpload = (props) => {
       setIsValid(false);
       fileIsValid = false;
     }
+
     props.onInput(props.id, pickedFile, fileIsValid);
   };
 
   const AudioHandler = () => {
-    filePickerRef.current.click();
+    filePickerRef.current?.click();
   };
 
   return (
@@ -55,7 +71,7 @@ const AudioUpload = (props) => {
         accept=".mp3"
         onChange={pickedHandler}
       />
-      <div className={`audio-upload ${props.center && 'center'}`}>
+      <div className={`audio-upload ${props.center ? 'center' : ''}`}>
         <div className="audio-upload__preview">
           {file && (
             <div>
@@ -69,7 +85,7 @@ const AudioUpload = (props) => {
           )}
           {!file && <p>Please pick an audio file.</p>}
         </div>
-        <br></br>
+        <br />
         <Button type="button" onClick={AudioHandler}>
           Pick Audio
         </Button>
