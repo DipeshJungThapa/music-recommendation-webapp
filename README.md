@@ -82,10 +82,10 @@ In another Tab navigate to the `client` directory, install dependencies, and sta
 ```sh
 cd client
 npm i
-npm start
+npm run dev
 ```
 
-The frontend runs on **port 3000** and will open in the browser automatically.
+The frontend runs on **port 5173** and will open in the browser automatically.
 
 ## Environment Variables
 
