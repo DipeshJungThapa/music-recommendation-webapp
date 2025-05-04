@@ -13,20 +13,9 @@ type Track = {
 
 type TrackListProps = {
   tracks: Track[];
-  isLoading: boolean;
 };
 
-const TrackList: React.FC<TrackListProps> = ({ tracks, isLoading }) => {
-  if (isLoading) {
-    return (
-      <div className="track-list">
-        <Card className="">
-          <h2>Loading tracks...</h2>
-        </Card>
-      </div>
-    );
-  }
-
+const TrackList: React.FC<TrackListProps> = ({ tracks }) => {
   if (tracks.length === 0) {
     return (
       <div className="track-list">
