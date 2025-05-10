@@ -6,7 +6,6 @@ This project is a collaborative effort. The original repository can be found at 
 ### Team Members
 - [Binayak Joshi](https://github.com/binayakjoshi)
 - [Dipesh Jung Thapa](https://github.com/DipeshJungThapa)
-- [Add other team members here]
 
 ## Overview
 This project is a content-based music recommendation system that suggests songs based on an uploaded audio file. The system extracts features from the uploaded file, finds similar songs from the FMA dataset using a KNN model, and fetches additional metadata from the Spotify API.
@@ -89,7 +88,14 @@ The project requires `.env` files inside the **ML model** and **server** directo
 6. The combined recommendations are sent back to the frontend and displayed to the user.
 
 ## My Contributions
-[Add a brief description of your specific contributions to this team project]
+In this collaborative project, my contributions were primarily focused on research, frontend tasks, and providing input in the ML model training process.
+ Key aspects of my work include:
+- Conducted a literature review to explore various research methods relevant to the project.
+- Assisted in dataset research and contributed to the preprocessing pipeline.
+- Helped with the development of the frontend and its integration with the backend.
+- Participated in the training of the ML model by providing input and suggestions on the process.
+
+
 
 ## Notes
 - Ensure that all dependencies are installed before running the project.
